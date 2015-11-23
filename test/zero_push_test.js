@@ -17,11 +17,11 @@ describe('ZeroPush module', function() {
     done();
   });
 
-  describe('API methods', function() {
+  describe('Registration', function() {
     var deviceToken = "1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef";
     var zeropush;
 
-    beforeEach(function(done) {
+    before(function(done) {
       zeropush = new ZeroPush(authToken);
       expect(zeropush).to.exist;
       done();
@@ -31,7 +31,7 @@ describe('ZeroPush module', function() {
       zeropush.register(deviceToken, [], function(error, responses) {
         expect(error).to.not.exist;
         expect(responses).to.exist;
-        done();
+        done(error);
       });
     });
 
@@ -39,7 +39,31 @@ describe('ZeroPush module', function() {
       zeropush.register(deviceToken, 'testing-channel', function(error, responses) {
         expect(error).to.not.exist;
         expect(responses).to.exist;
-        done();
+        done(error);
+      });
+    });
+
+    it('should unregister device token', function(done) {
+      zeropush.unregister(deviceToken, function(error, responses) {
+        expect(error).to.not.exist;
+        expect(responses).to.exist;
+        done(error);
+      });
+    });
+  });
+
+  describe('API methods', function() {
+    var deviceToken = "1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef";
+    var zeropush;
+
+    before(function(done) {
+      zeropush = new ZeroPush(authToken);
+      expect(zeropush).to.exist;
+
+      zeropush.register(deviceToken, 'testing-channel', function(error, responses) {
+        expect(error).to.not.exist;
+        expect(responses).to.exist;
+        done(error);
       });
     });
 
@@ -47,7 +71,7 @@ describe('ZeroPush module', function() {
       zeropush.setBadge({ 'badge': 1, 'device_token': deviceToken }, function(error, responses) {
         expect(error).to.not.exist;
         expect(responses).to.exist;
-        done();
+        done(error);
       });
     });
 
@@ -55,7 +79,7 @@ describe('ZeroPush module', function() {
       zeropush.setBadge({ 'badge': 0, 'device_token': deviceToken }, function(error, responses) {
         expect(error).to.not.exist;
         expect(responses).to.exist;
-        done();
+        done(error);
       });
     });
 
@@ -63,7 +87,7 @@ describe('ZeroPush module', function() {
       zeropush.inactiveTokens({}, function(error, responses) {
         expect(error).to.not.exist;
         expect(responses).to.exist;
-        done();
+        done(error);
       });
     });
 
@@ -71,7 +95,7 @@ describe('ZeroPush module', function() {
       zeropush.subscribe({ 'channel': 'testing-channel', 'device_token': deviceToken }, function(error, responses) {
         expect(error).to.not.exist;
         expect(responses).to.exist;
-        done();
+        done(error);
       });
     });
 
@@ -79,7 +103,7 @@ describe('ZeroPush module', function() {
       zeropush.unsubscribe({ 'channel': 'testing-channel', 'device_token': deviceToken }, function(error, responses) {
         expect(error).to.not.exist;
         expect(responses).to.exist;
-        done();
+        done(error);
       });
     });
 
@@ -94,7 +118,7 @@ describe('ZeroPush module', function() {
       }, function(error, responses) {
         expect(error).to.not.exist;
         expect(responses).to.exist;
-        done();
+        done(error);
       });
     });
 
@@ -106,19 +130,20 @@ describe('ZeroPush module', function() {
       }, function(error, responses) {
         expect(error).to.not.exist;
         expect(responses).to.exist;
-        done();
+        done(error);
       });
     });
 
     it('should broadcast to testing-channel', function(done) {
-      zeropush.broadcast('ios-mac', { channel: 'testing-channel' }, {
+      zeropush.broadcast('ios-mac', {}, {
+        channel: 'testing-channel',
         alert: 'Hello, World',
         badge: '+1',
         sound: 'default'
       }, function(error, responses) {
         expect(error).to.not.exist;
         expect(responses).to.exist;
-        done();
+        done(error);
       });
     });
 
