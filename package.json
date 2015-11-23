@@ -20,6 +20,9 @@
     "parse-link-header": "^0.2.0",
     "request": "^2.53.0"
   },
+  "scripts": {
+    "test": "mocha --reporter spec --bail --check-leaks test/"
+  },
   "main": "./lib/zero_push",
   "keywords": [
     "wrapper",
@@ -42,5 +45,10 @@
     {
       "name": "holgersindbaek"
     }
-  ]
+  ],
+  "devDependencies": {
+    "chai": "^3.4.1",
+    "mocha": "^2.3.4",
+    "supertest": "^1.1.0"
+  }
 }
