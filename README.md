@@ -4,10 +4,15 @@
 
 ZeroPush is a simple service for sending Apple Push Notifications. This library wraps the API requests for use in NodeJS.
 
-## To do
+## Test
 
-* /!\ Maybe run some tests /!\
-* Better errors handling (name and message)
+Run the test with
+
+     $ ZERO_PUSH_TOKEN=<your_zero_push_server_token> npm test
+
+Alternatively, set the DEBUG environment variable to log debug output
+
+     $ ZERO_PUSH_TOKEN=<your_zero_push_server_token> DEBUG=main npm test
 
 ## Changes log
 
