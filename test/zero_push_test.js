@@ -91,6 +91,22 @@ describe('ZeroPush module', function() {
       });
     });
 
+    it('should return registered devices', function(done) {
+      zeropush.devices({}, function(error, responses) {
+        expect(error).to.not.exist;
+        expect(responses).to.exist;
+        done(error);
+      });
+    });
+
+    it('should return existing channels', function(done) {
+      zeropush.channels({}, function(error, responses) {
+        expect(error).to.not.exist;
+        expect(responses).to.exist;
+        done(error);
+      });
+    });
+
     it('should subscribe device token to testing-channel', function(done) {
       zeropush.subscribe({ 'channel': 'testing-channel', 'device_token': deviceToken }, function(error, responses) {
         expect(error).to.not.exist;
